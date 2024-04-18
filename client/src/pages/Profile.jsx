@@ -19,6 +19,7 @@ import {
   signOutUserSuccess,
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -146,7 +147,9 @@ export default function Profile() {
         />
         <p className="text-sm self-center">
           {fileUploadError ? (
-            <span className="text-red-700">Error Image upload (image must be less than 2 mb)</span>
+            <span className="text-red-700">
+              Error Image upload (image must be less than 2 mb)
+            </span>
           ) : filePerc > 0 && filePerc < 100 ? (
             <span className="text-slate-700">{`Uploading ${filePerc}`}</span>
           ) : filePerc === 100 ? (
@@ -178,16 +181,31 @@ export default function Profile() {
           className="border p-3 rounded-lg"
           onChange={handleChange}
         />
-        <button disabled={loading} className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80">
-          {loading ? 'Loading...' : 'Update'}
+        <button
+          disabled={loading}
+          className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
+        >
+          {loading ? "Loading..." : "Update"}
         </button>
+        <Link className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95" to={"/create-listing"}>
+          Create Listing
+        </Link>
         <div className="flex justify-between mt-5">
-          <span onClick={handleDeleteUser} className="text-red-700 cursor-pointer">Delete account</span>
-          <span onClick={handleSignOut} className="text-red-700 cursor-pointer">Sign out</span>
+          <span
+            onClick={handleDeleteUser}
+            className="text-red-700 cursor-pointer"
+          >
+            Delete account
+          </span>
+          <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
+            Sign out
+          </span>
         </div>
 
         <p className="text-red-700 mt-5">{error ? error : ""}</p>
-        <p className="text-green-700 mt-5">{updateSuccess ? "User is updated successfully" : ""}</p>
+        <p className="text-green-700 mt-5">
+          {updateSuccess ? "User is updated successfully" : ""}
+        </p>
       </form>
     </div>
   );
