@@ -291,7 +291,9 @@ export default function UpdateListing() {
               />
               <div className="flex flex-col items-center">
                 <p>Regular price</p>
-                <span className="text-xs ">($ / month)</span>
+                {formData.type === "rent" && (
+                  <span className="text-xs">($ / month)</span>
+                )}
               </div>
             </div>
             {formData.offer && (
@@ -308,7 +310,9 @@ export default function UpdateListing() {
                 />
                 <div className="flex flex-col items-center">
                   <p>Discounted price</p>
-                  <span className="text-xs ">($ / month)</span>
+                  {formData.type === "rent" && (
+                    <span className="text-xs">($ / month)</span>
+                  )}
                 </div>
               </div>
             )}
@@ -362,8 +366,11 @@ export default function UpdateListing() {
                 </button>
               </div>
             ))}
-          <button disabled={loading || uploading} className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
-            {loading ? 'Updating...' : 'Update listing'}
+          <button
+            disabled={loading || uploading}
+            className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+          >
+            {loading ? "Updating..." : "Update listing"}
           </button>
           {error && <p className="text-red-700 text-sm">{error}</p>}
         </div>
